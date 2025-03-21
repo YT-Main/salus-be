@@ -148,7 +148,7 @@ async def upload_image(image: UploadFile = File(...), skinfo: str = Form(...)):
 
         try:
             print("📡 Sending Base64 Image to OpenRouter...")
-            GPT_response = AI.ask(skinfo, cancer_counts, output_path)
+            GPT_response = AI.ask_cancer(skinfo, cancer_counts, output_path)
             print("GPT_response = ",GPT_response)
 
             if not GPT_response:  

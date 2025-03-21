@@ -115,13 +115,16 @@ class YOLOImageProcessor:
                 color = default_colors.get(int(class_id), (255, 255, 255))
             
             print(f"Class ID: {class_id}, Assigned color: {color}")
-            cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
+            overlay = image.copy()
+            cv2.rectangle(overlay, (x1, y1), (x2, y2), color, -1)  # -1 fills the rectangle
+            cv2.addWeighted(overlay, 0.2, image, 0.8, 0, image)  # 20% opacity
+            cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)  # Draw border
             
 
             if use_pastel:
-                label = f"{self.model2.names.get(int(class_id), 'unknown')} {score:.2f}"
+                label = f"{self.model2.names.get(int(class_id), 'unknown')}"
             else:
-                label = f"{self.model.names.get(int(class_id), 'unknown')} {score:.2f}"
+                label = f"{self.model.names.get(int(class_id), 'unknown')}"
             cv2.putText(image, label, (x1, max(y1 - 10, 10)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
         except Exception as e:
