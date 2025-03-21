@@ -187,3 +187,7 @@ async def upload_image(image: UploadFile = File(...), skinfo: str = Form(...)):
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8080)
 
+
+@app.get("/alive")
+async def alive():
+    return {"message": "Server is running"}
