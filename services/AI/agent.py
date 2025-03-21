@@ -104,7 +104,7 @@ class AskTheDoc:
                       Do not do anything not listed in the instructions
                       Do not list night only or morning only on the sections, it is only when you make the routine will you find out
                       Most importantly respond in JSON format without any emojis or symbols
-                      If there is no cancer (only if cancer counts is empty!!!!! other wise things like NV are cancer), respond with "No cancer detected" leaving the other sections empty!
+                      If there is no cancer (only if detected 0 cancer said other wise things like NV are cancer), respond with "No cancer detected" leaving the other sections empty!
                       Within the JSON I would like a format like so (the sections remain as they are, even though this is about skin cancer, keep the “acne_information” naming structure):
                       json
                       Copy code
@@ -158,7 +158,7 @@ class AskTheDoc:
                       Put all of these sections under one acne_information section encompassing them all (despite it being about skin cancer, keep the naming structure as is)
                       Make sure each and every thing in these instructions are followed, go through it again if you must to confirm
                   '''},
-                  {"role": "user", "content": f"User details: {user_message}. Detected {lesion_count} lesions/pimples."},
+                  {"role": "user", "content": f"User details: {user_message}. Detected {lesion_count} cancer."},
                   {"role": "user", "content": [{"type": "image_url", "image_url": {"url": f"data:image/png;base64,{base64_image}"}}]}  # 🔥 Send image as Base64
               ],
               temperature=0.7
