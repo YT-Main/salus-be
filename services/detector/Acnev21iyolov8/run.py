@@ -8,7 +8,7 @@ class YOLOImageProcessor:
 
         self.model_path = model_path
         self.confidence_threshold = confidence_threshold
-        self.cancer_threshold = 0.8
+        self.cancer_threshold = 1
         # Load first model (acne detector)
         self.model = self._load_model(self.model_path)
         # Load second model (skin cancer detector)
@@ -75,7 +75,7 @@ class YOLOImageProcessor:
         boxes2 = []
         for result in results2.boxes.data.tolist():
             x1, y1, x2, y2, score, class_id = result
-            if score > self.cancer_threshold:
+            if score > 0.65:
                 class_name = self.model2.names.get(int(class_id), "unknown type")
                 counts2[class_name] += 1
                 boxes2.append((x1, y1, x2, y2, score, class_id))
